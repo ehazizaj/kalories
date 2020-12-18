@@ -19,5 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['request' => false, 'reset' => false, 'email' => false]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
-Route::resource('meals', '\App\Http\Controllers\MealController');
+
+Route::group(['middleware' => ['auth', 'user']], function () {
+    Route::resource('meals', '\App\Http\Controllers\MealController');
+});
+
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
+});

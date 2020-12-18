@@ -67,11 +67,10 @@
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
+            @include('partials.messages')
             @yield('content')
         </section>
     </div>
-
-
 </div>
 
 <script src="{{ mix('js/app.js') }}" defer></script>
