@@ -18,13 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes(['request' => false, 'reset' => false, 'email' => false]);
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::resource('meals', '\App\Http\Controllers\MealController');
+    Route::get('search-meals', [App\Http\Controllers\MealController::class, 'search'])->name('search-meals');
+    Route::get('/', [App\Http\Controllers\MealController::class, 'index'])->name('home');
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::get('settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
-    Route::post('settings-update/{id}', [App\Http\Controllers\HomeController::class, 'update_settings'])->name('settings.update');
+    Route::get('settings', [App\Http\Controllers\SettingsController::class, 'settings'])->name('settings');
+    Route::post('settings-update/{id}', [App\Http\Controllers\SettingsController::class, 'update_settings'])->name('settings.update');
 });

@@ -27,6 +27,7 @@ class Meal extends Model
      */
     public function user()
     {
-        return $this->belongsToMany(User::class, 'meal_user');
+        return $this->belongsToMany(User::class, 'meal_user','meal_id', 'user_id');
+
     }
 }

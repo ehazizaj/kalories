@@ -16,6 +16,8 @@
             </div>
         </div>
     </section>
+    <!-- Main content -->
+    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -27,12 +29,12 @@
                                     <div class="col-3">
                                         <label class="control-label col-lg-12">Date From
                                         </label>
-                                        <input type="date" class="form-control" name="date_from">
+                                        <input type="date" class="form-control" name="date_from" value="{{$from}}">
                                     </div>
                                     <div class="col-3">
                                         <label class="control-label col-lg-12">Date To
                                         </label>
-                                        <input type="date" class="form-control" name="date_to">
+                                        <input type="date" class="form-control" name="date_to" value="{{$to}}">
                                     </div>
                                     <div class="col-3">
                                         <button type="submit" class="btn btn-primary" style="margin-top: 32px">Search
@@ -51,6 +53,7 @@
                                 </ul>
                             </div>
                         </div>
+                        <!-- /.card-header -->
                         <div class="card-body">
                             <table class="table table-bordered">
                                 <thead>
@@ -152,8 +155,8 @@
                         </div>
                         <div class="card-footer">
                             <ul class="pagination pagination-sm m-0 float-right">
-                                {{$meals->links("pagination::bootstrap-4")}}
 
+                                {{$meals->appends(request()->input())->links("pagination::bootstrap-4")}}
                             </ul>
                         </div>
                     </div>
@@ -162,8 +165,12 @@
 
         </div>
     </section>
+
 @endsection
+
 <script type="text/javascript">
+
+
     function deleteRow(elemet) {
         var id = elemet;
         var url = "{{ route('meals.destroy', ":id") }}";

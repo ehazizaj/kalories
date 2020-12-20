@@ -30,8 +30,7 @@ class MealRespository implements MealRespositoryInterface
      */
     public function getAllMeals()
     {
-        $user = Auth::user();
-        return $user->meals()->paginate(10);
+        return Auth::user()->meals()->take(100)->paginate(10);
     }
 
 
@@ -43,66 +42,21 @@ class MealRespository implements MealRespositoryInterface
      */
     public function createNewMeal($data)
     {
-        $user = Auth::user();
-        $meal = Meal::create($data);
-        $user->meals()->attach([$meal->id]);
+        $meal = $this->model::create($data);
+        Auth::user()->meals()->attach([$meal->id]);
         return $data;
     }
 
-
-
     /**
-     * Find Meal by id
-     *
-     * @param $data
-     * @return mixed
-     */
-    public function findMeal($id)
-    {
-        return $this->model->findOrFail($id);
-    }
-
-
-
-
-    /**
-     * Update Meal
-     *
-     * @param $data
-     * @return mixed
-     */
-    public function updateMeal($data)
-    {
-        $meal = $this->model->find($data['id']);
-        $meal->name = $data['name'];
-        $meal->calories = $data['calories'];
-        $meal->date_of_consumption = $data['date_of_consumption'];
-        $meal->time_of_consumption = $data['time_of_consumption'];
-        $meal->save();
-        return $meal;
-    }
-
-
-    /**
-     * Delete Meal
-     *
-     * @param $id
-     * @return bool
-     */
-    public function deleteMeal($id): bool
-    {
-        $meal = $this->model->find($id);
-        $meal->delete();
-        return true;
-    }
-
 
     /**
      * @return mixed
      */
     public function filterMeals($data)
     {
-        return $this->model->get();
 
+        $from =$data['date_from'];
+        $to = $data['date_to'];
+        return Auth::user()->meals()->whereBetween('date_of_consumption', [$from, $to])->paginate(10);
     }
 }
