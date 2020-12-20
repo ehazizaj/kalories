@@ -29,6 +29,15 @@
     </div>
 @endif
 
+@if ($message = Session::get('validator'))
+    <div class="alert alert-danger alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        @foreach ($message->all() as $error)
+            <strong>{{ $error }}</strong><br/>
+        @endforeach
+    </div>
+@endif
+
 
 @if ($errors->any())
     <div class="alert alert-danger">

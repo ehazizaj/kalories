@@ -47,6 +47,6 @@ class User extends Authenticatable
      */
     public function meals()
     {
-        return $this->belongsToMany(Meals::class, 'meal_user');
+        return $this->belongsToMany(Meal::class, 'meal_user');
     }
 }

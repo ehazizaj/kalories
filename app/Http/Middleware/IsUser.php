@@ -22,6 +22,5 @@ class IsUser
             return $next($request);
         }
         return Redirect::back()->with('error', 'You are not allowed to perform this action');
-        //return redirect('/')->with('error','You are not allowed to perform this action');
     }
 }

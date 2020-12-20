@@ -26,4 +26,5 @@ Route::group(['middleware' => ['auth', 'user']], function () {
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
+    Route::post('settings-update/{id}', [App\Http\Controllers\HomeController::class, 'update_settings'])->name('settings.update');
 });

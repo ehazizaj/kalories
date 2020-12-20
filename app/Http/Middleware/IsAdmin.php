@@ -22,9 +22,6 @@ class IsAdmin
             return $next($request);
         }
 
-        //return redirect('/')->with('error','You are not allowed to perform this action');
-        //return redirect()->back()->getTargetUrl()->with('error','You are not allowed to perform this action')
-        //return Redirect::back()->with(['error', 'You are not allowed to perform this action']);
         return Redirect::back()->with('error', 'You are not allowed to perform this action');
     }
 }

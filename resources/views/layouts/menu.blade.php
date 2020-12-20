@@ -12,7 +12,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('meals.index') }}" class="nav-link {{(\Route::current()->getName() == 'meals.index') ? 'active' : '' }}">
+    <a href="{{ route('meals.index') }}" class="nav-link {{(\Route::current()->getName() == 'meals.index') || (\Route::current()->getName() == 'meals.create') ? 'active' : '' }}">
         <i class="nav-icon fas fa-soap"></i>
         <p>Meals</p>
     </a>
